@@ -1,8 +1,13 @@
-Option Explicit
+#Option Explicit
 
-Sub CreateVertNumsCDF()
+#Sub CreateVertNumsCDF()
 #This script creates a .txt file with initial vert numbers at age by box, in the same directory as this .xls file
 
+ExcelFile <- "/home/chris/Documents/HI/Windows/ECCALbioparams.xls"
+
+require(gdata)
+
+# Initialize the variable names
 numsheets <- NULL
 group <- NULL
 box <- NULL
@@ -25,34 +30,27 @@ start <- NULL
 strlngth <- NULL
 r <- NULL
 
-Dim numsheets As Long
-Dim group, age, box, numboxes, numages, numgroups, fnum As Integer
-Dim numstring, atlantisname As String
-Dim currentxlsname, outputfilename, pathname As String
-Dim nums, fill1, fill2, lastline As String
-Dim numsatage(), namefile, start As String
-Dim strlngth As String
-Dim r As Integer
+#Below are things you may want to change
+currentxlsname = "ECCALbioparams.xls" # name of this excel file
+outputfilename = "VertNums_for_CDF.txt" #name of the file you want outputted
+numages = 10  # number of age classes, should always be 10
+numboxes = 82 # number of 2-d boxes in the model
 
-'----------------------------------------------
-'Below are things you may want to change
-currentxlsname = "ECCALbioparams.xls" 'name of this excel file
-outputfilename = "VertNums_for_CDF.txt" 'name of the file you want outputted
-numages = 10  'number of age classes, should always be 10
-numboxes = 82 'number of 2-d boxes in the model
-start = "g60" 'address of the cell one row up and one column left of where numbers of age1 in box 0 begin
+# CDD note: This will need to be changed! 
+start = "g60" #address of the cell one row up and one column left of where numbers of age1 in box 0 begin
 
-'------------------------------------------------
+# Set number of depth layer
+fill1 <- ", _, _, _, _, _, _, _," #'formatting for the 7 depth layers after the one that numbers go into
+fill2 <- " =" #'formatting that gets added to the group-age class name in the cdf
+lastline = "  _, _, _, _, _, _, _, _ ;" #'formatting for the last line of each age class entry
 
+numgroups = sheetCount(ExcelFile) #
 
-fill1 = ", _, _, _, _, _, _, _," 'formatting for the 7 depth layers after the one that numbers go into
-fill2 = " =" 'formatting that gets added to the group-age class name in the cdf
-lastline = "  _, _, _, _, _, _, _, _ ;" 'formatting for the last line of each age class entry
-
-numgroups = Worksheets.Count
-fnum = FreeFile() 'retrives the next available file number
+# CD - START HERE!!!
+fnum = FreeFile() #'retrives the next available file number
 pathname = Workbooks(currentxlsname).Path
 namefile = pathname & "\" & outputfilename
+
 
 Open namefile For Output As fnum 'opens output file
 
@@ -137,5 +135,4 @@ For group = 1 To numgroups
 Next group
 
 Close #fnum 'closes the file, must do this or else you can't open it again
-End Sub
 
