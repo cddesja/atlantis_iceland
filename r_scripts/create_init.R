@@ -1,6 +1,6 @@
 
 # Set Path of Function Group
-FGfilePath = "/home/chris/github/AtlantisTools/python/SETasGroups.csv"
+FGfilePath = "/home/chris/Dropbox/HI/Research/IcelandicAtlantis/AtlantisFiles/SETasGroups.csv"
 
 # Read in function group csv
 FunGroup <- read.csv(FGfilePath,header=T,sep="\t")
