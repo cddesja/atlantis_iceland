@@ -9,10 +9,10 @@ FunGroup <- read.csv(FGfilePath,header=T,sep="\t")
 z = 7
 
 # Number of boxes
-b = 11
+b = 53
 
 # Name for model
-modelName = "IcelandAtlantis"
+modelName = "iceland_atlantis"
 
 # Head of the init cdf file
 header <- c("netcdf ",modelName," { ","\n","dimensions:", "\n",
