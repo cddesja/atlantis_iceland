@@ -1,6 +1,6 @@
- rAtlantis
+ atlantis_iceland
 ==========
 
-Collection of R scripts for Atlantis
+Files and notes related to the Atlantis Iceland Model
 
-All scripts are released under GNU GPL v3.
+All programs are released under GNU GPL v3 and everything else is released under the Creative Commons Attribution-NonCommercial 4.0 International License.
