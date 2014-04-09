@@ -57,21 +57,11 @@ BGM & Box Geometry Model. This is the file format that Atlantis requires its spa
 \newpage
 \section{Setting up the spatial data}
 
-Atlantis requires a special spatial file format. This is termed a bgm file (box geometry file). The bgm defines the geography (i.e.\ bathmetry) used in the Atlantis model. The bgm file stores the saptial information in x and y terms rather than latitude and longitude. Information about the projection (which is used in visualization and for determining daylength), number of boxes, number of dynamic faces, maximum depth, vertical mixing and horizontal transport scalars, whether a box is a boundary box (i.e.\ is it dynamic, meaning does it border the open ocean) and spatial layout of the boxes and faces (e.g.\ area, location of vertices, depth of box) is specified in the bgm file. 
+Atlantis requires a special spatial file format. This is termed a \texttt{bgm} file (box geometry file). The \texttt{bgm} file defines the geometry (i.e.\ bathmetry) used in the Atlantis model. The \texttt{bgm} file stores the spatial information in x and y terms rather than latitude and longitude. Information about the projection (which is used in the visualization of the spatial data and for determining the day length), number of boxes, number of dynamic faces, maximum depth, vertical mixing and horizontal transport scalars, whether a box is a boundary box (i.e.\ is it dynamic, meaning does it border the open ocean) and spatial layout of the boxes and faces (e.g.\ area, location of vertices, depth of box) are specified in the \texttt{bgm} file. 
 
- For the Icelandic Atlantis model, data contained in the
- \texttt{reitmapping.tsv} and the \texttt{R} \texttt{geo} package were
- used to develop the spatial layer. The subdivisions used are
- described in \cite{dst2}. The subdivisions were exported from
- \texttt{R} to \texttt{QGIS} where they were modified to not overlap
- with Iceland, Greenland, and the Faroe Islands and boundary boxes
- were added around the subdivisions. The boundary boxes, generally,
- buffer the active model area by $1/2\degree$ longitude and
- $1/4\degree$ latitude. The spatial map is shown in figure~\ref{ref:spdef}. Comparing figure with the figure 9.7 in
- \cite{dst2}, the location and, generally, uniform width of the
- boundary box around the subdivisions is discernible. 
+For the Icelandic Atlantis model, data contained in the \texttt{reitmapping.tsv} and the \texttt{R} \texttt{geo} package were used to develop the spatial layer. The subdivisions used are described in \cite{dst2}. The subdivisions were exported from \texttt{R} to \texttt{QGIS} where they were modified to not overlap with Iceland, Greenland, and the Faroe Islands and boundary boxes were added around the subdivisions. The boundary boxes, generally, buffer the active model area by $1/2\degree$ longitude and $1/4\degree$ latitude. These boundary boxes were selected to be make the interpolation of the hydrography data easier. The spatial map is shown in figure~\ref{ref:spdef}. Comparing the figure with the Figure 9.7 in \cite{dst2}, the location and, generally, uniform width of the boundary box around the subdivisions is discernible. 
 
-On the CSIRO wiki, there are various tools to help create a bgm file. In particular the \texttt{bgmeriser.jar} tool was used after the shapefile was cleaned in \texttt{QGIS} and \texttt{GRASS}. The projection used was ISN93/Lambert 1993, which corresponds to the following \texttt{proj4} format:   
+On the CSIRO wiki, there are various tools to help generate a \texttt{bgm} file. In particular the \texttt{bgmeriser.jar} tool was used after the shapefile was cleaned in \texttt{QGIS} and \texttt{GRASS} followed the procedure described on the Atlantis CSIRO wiki. The projection used was ISN93/Lambert 1993, which corresponds to the following \texttt{proj4} format:   
 
 \begin{small}
 \begin{verbatim}
@@ -82,9 +72,9 @@ On the CSIRO wiki, there are various tools to help create a bgm file. In particu
 
 This was the projection information was obtained from \cite{proj4iceland} and provided to the \texttt{bgmeriser.jar} tool.
 
- The maximum depth for the boxes shown in figure~\ref{ref:spdef} was based on the depth information provided in \texttt{geo::gbdypi}. The depths ranged from 100m to 3800m, exluding Iceland the Faroe Islands which are assigned a depth of 0 in the model (to avoid having islands in the bgm file).
+ The maximum depth for the boxes shown in figure~\ref{ref:spdef} was based on the depth information provided in \texttt{geo::gbdypi}. The depths ranged from 100m to 3800m. Iceland and the Faroe Islands were assigned a depth of 0 in the model to avoid having islands in the \texttt{bgm} file.
  
- For the Icelandic Atlantis model, the water column was split up into at most six layers: 0 - 50 m, 50 - 150 m, 150 - 300 m, 300 - 600m, 600 - 1000m, 1000m). The size of these layers was selected after consultation with researchers at Hafro and these layers are similar to depth layers used in other Atlantis models \cite{link2010northeast, savina2008ecologically}.
+ For the Icelandic Atlantis model, the water column was split up into at most six water column layers: 0 - 50 m, 50 - 150 m, 150 - 300 m, 300 - 600m, 600 - 1000m, 1000m) with one sediment layer. The size of these layers was selected after consultation with researchers at Hafro and these layers are similar to depth layers used in other Atlantis models \cite{link2010northeast, savina2008ecologically}.
 
 
 \begin{center}
