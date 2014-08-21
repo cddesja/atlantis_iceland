@@ -1,0 +1,138 @@
+# Generate initial conditions
+#
+# This script will be used to generate the initial conditions for the 
+# Iceland Atlantis model.
+
+# Christopher David Desjardins
+
+# Constants
+kScriptDir <- "~/Dropbox/hi/atlantis/atlantis_r_scripts/"
+kDataDir <- "~/Dropbox/hi/atlantis/hafro_data/"
+kLandings <- "init_conditions/"
+
+# Change working directory
+setwd(kDataDir)
+
+# Load appropriate library
+library(fjolst)
+library(dplyr)
+
+# Load weight-length allometric and von-Bertalanffy parameters
+load("vb_ab_params.Rdata")
+
+# Source R scripts
+source(paste(kScriptDir, "skalamedtoldum.R", sep = ""))  # Length Distributions
+source(paste(kScriptDir, "ssefcn.R", sep = ""))
+
+# Read in tegund CSV
+fisk_tegund <- read.csv("fiskar_heiti.csv", header = TRUE)
+
+# Keep only tegund and Atlantis codes
+fiskur <- select(fisk_tegund, tegund, Code)  
+
+# Convert stodvar to a tbl_df
+stodvar_df <- tbl_df(stodvar)
+stodvar_df$stype <- ifelse(stodvar_df$synaflokkur == 30, "spring",
+                           ifelse(stodvar_df$synaflokkur == 35, "fall",
+                           	"other"))
+							
+# Join stodvar with length and numbers 
+le_yr <- inner_join(all.le,stodvar_df)
+nu_yr <- inner_join(all.nu,stodvar_df)
+
+# Unconditioned length distributions
+unc_length <- Skala.med.toldum(le_yr,nu_yr)
+length_red <- select(unc_length, synis.id, tegund, stype, lat, lon, lengd,
+	fj.alls, ar)
+length_red <- filter(length_red, fj.alls > -1)
+length_red <- filter(length_red, fj.alls != "Inf")
+length_df <- tbl_df(length_red)
+
+# Free up some RAM
+rm(le_yr, nu_yr, unc_length, length_red, stodvar_df, fisk_tegund)
+
+# Combine w-l & vB params with fiskur nafn
+wvb_params <- inner_join(wvb.params, fiskur)
+
+# Join the w-l and vb params with the length distribution data
+length_abvb <- inner_join(length_df, wvb_params)
+
+#
+# Read in landings data
+#
+
+# Create a data set of all the landings data
+file_names <- dir("init_conditions")
+name_tmp <- strsplit(file_names, "_")
+code <- NULL
+for(i in 1:length(name_tmp)){
+	code[i] <- name_tmp[[i]][1]
+	}
+tegund <- NULL
+for(i in 1:length(name_tmp)){
+	tegund[i] <- name_tmp[[i]][2]
+	}
+code_tegund <- data.frame(Code = code, tegund = as.numeric(tegund))
+code_tegund[tegund == "landings.csv","tegund"] <- -999
+length_code <- filter(length_abvb, Code %in% code_tegund$Code)
+
+landings <- list()
+for(i in 1:length(name_tmp)){
+	if(code_tegund$tegund[i] == -999){
+		landings[[i]] <- read.csv(paste("init_conditions/", code_tegund$Code[i], "_landings.csv", sep = ""), header = T) } else
+		 landings[[i]] <- read.csv(paste("init_conditions/", code_tegund$Code[i], "_", code_tegund$tegund[i], "_", "landings.csv", sep = ""), header = T)
+}
+names(landings) <- code_tegund$Code
+landings[["FHE"]]$Total <- landings[["FHE"]]$Spring + landings[["FHE"]]$Discards + landings[["FHE"]]$Summer
+landings[[9]]$Total <- landings[[9]]$Females + landings[[9]]$Roe 
+landings[["WHALE"]]$Total <- rowSums(landings[["WHALE"]][-1], na.rm = T)
+landings[[10]]$Total <- landings[[10]]$Iceland
+
+landings_dataframe <- NULL
+for(i in 1:length(landings)){
+	if("Total" %in% colnames(landings[[i]])){
+		tmp <- data.frame(ar = landings[[i]]$Year, Total = landings[[i]]$Total)
+	} else 	tmp <- data.frame(ar = landings[[i]]$Year, Total = landings[[i]]$Landings)
+	landings_dataframe <- rbind(landings_dataframe, tmp)
+	}
+yrs <- NULL
+for(i in 1:length(landings)){
+	yrs[i] <- nrow(landings[[i]])
+}
+
+landings_dataframe$Code <- rep(code_tegund$Code, yrs)	
+landings_dataframe$tegund <- rep(code_tegund$tegund, yrs)	
+
+# Join length_abvb and landings_datamframe
+ab_land <- left_join(length_abvb, landings_dataframe)
+
+
+cod_tmp <- 
+  cod_length %>%
+  group_by(ar) %>%
+  do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
+
+cod_lands <- read.csv("init_conditions/FCD_1_landings.csv", header = T)
+cod_lands$ar <- cod_lands$Year    
+
+cod_biomass <- left_join(cod_tmp, cod_lands)
+cod_biomass <- filter(cod_biomass, ar < 2014)
+
+# Landings data
+Y <- cod_biomass$Total
+
+# Years
+yrs <- cod_biomass$ar
+
+# Abundance indices, this is what I calculated based on w-l relationship
+I <- cod_biomass$biomass
+
+# Initial conditions
+r <- .01
+B0 <- sum(Y)
+K <- B0
+q <- mean(I)/B0
+beta0 <- log(c(K, B0, r, q))
+
+result0 <- ssefcn(beta0,yrs, Y, I, plot.it = F)
+fit <- nlm(ssefcn, beta0, yrs, Y, I) 

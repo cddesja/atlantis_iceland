@@ -1,0 +1,199 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist{entry}{nty}
+    \entry{dst2}{report}{}
+      \name{labelname}{1}{}{%
+        {{hash=7079c72c21415131774625ba1d64f4b0}{Anonymous}{A\bibinitperiod}{}{}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=7079c72c21415131774625ba1d64f4b0}{Anonymous}{A\bibinitperiod}{}{}{}{}{}{}}%
+      }
+      \list{institution}{1}{%
+        {Marine Research Institute}%
+      }
+      \strng{namehash}{7079c72c21415131774625ba1d64f4b0}
+      \strng{fullhash}{7079c72c21415131774625ba1d64f4b0}
+      \field{sortinit}{A}
+      \field{labeltitle}{Development of structurally detailed statistically testable models of marine populations}
+      \field{number}{Fj{\"o}lrit nr. 119}
+      \field{title}{Development of structurally detailed statistically testable models of marine populations}
+      \field{type}{techreport}
+      \field{year}{2004}
+    \endentry
+    \entry{is_fish}{online}{}
+      \name{labelname}{1}{}{%
+        {{hash=7079c72c21415131774625ba1d64f4b0}{Anonymous}{A\bibinitperiod}{}{}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=7079c72c21415131774625ba1d64f4b0}{Anonymous}{A\bibinitperiod}{}{}{}{}{}{}}%
+      }
+      \strng{namehash}{7079c72c21415131774625ba1d64f4b0}
+      \strng{fullhash}{7079c72c21415131774625ba1d64f4b0}
+      \field{sortinit}{A}
+      \field{labeltitle}{Icelandic Ministry of Fisheries and Agriculture}
+      \field{month}{03}
+      \field{title}{Icelandic Ministry of Fisheries and Agriculture}
+      \field{year}{2014}
+      \verb{url}
+      \verb http://www.fisheries.is/
+      \endverb
+    \endentry
+    \entry{proj4iceland}{online}{}
+      \name{labelname}{4}{}{%
+        {{hash=62d71942fdae89036bbdf78623e9a21d}{Butler}{B\bibinitperiod}{Howard}{H\bibinitperiod}{}{}{}{}}%
+        {{hash=a8175d691889d27bca4cfaa39ee9c6bf}{Schmidt}{S\bibinitperiod}{Christopher}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=2b66ef1653d4243b6bfaced5e94b8536}{Springmeyer}{S\bibinitperiod}{Dane}{D\bibinitperiod}{}{}{}{}}%
+        {{hash=3fcf0a3c069759f054987ce2ecbf9e13}{Livni}{L\bibinitperiod}{Josh}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{4}{}{%
+        {{hash=62d71942fdae89036bbdf78623e9a21d}{Butler}{B\bibinitperiod}{Howard}{H\bibinitperiod}{}{}{}{}}%
+        {{hash=a8175d691889d27bca4cfaa39ee9c6bf}{Schmidt}{S\bibinitperiod}{Christopher}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=2b66ef1653d4243b6bfaced5e94b8536}{Springmeyer}{S\bibinitperiod}{Dane}{D\bibinitperiod}{}{}{}{}}%
+        {{hash=3fcf0a3c069759f054987ce2ecbf9e13}{Livni}{L\bibinitperiod}{Josh}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{0289be759eb13c187e2e4d9ec4221d17}
+      \strng{fullhash}{48a3f4b2392e837f5e49e3457a0cb385}
+      \field{sortinit}{B}
+      \field{labeltitle}{Spatial {R}eference}
+      \field{month}{03}
+      \field{title}{Spatial {R}eference}
+      \field{year}{2014}
+      \verb{url}
+      \verb http://spatialreference.org/ref/epsg/3057/proj4/
+      \endverb
+    \endentry
+    \entry{fishdb}{online}{}
+      \name{labelname}{2}{}{%
+        {{hash=3e2d371e34e51bcbc629e9a37ef9f2c6}{Froese}{F\bibinitperiod}{R}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=8cc166fcd7766255b9b88dc2377f43b3}{Pauly}{P\bibinitperiod}{D}{D\bibinitperiod}{}{}{}{}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=3e2d371e34e51bcbc629e9a37ef9f2c6}{Froese}{F\bibinitperiod}{R}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=8cc166fcd7766255b9b88dc2377f43b3}{Pauly}{P\bibinitperiod}{D}{D\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{01ea51f6f947ea3c81349c1ec03932ae}
+      \strng{fullhash}{01ea51f6f947ea3c81349c1ec03932ae}
+      \field{sortinit}{F}
+      \field{labeltitle}{FishBase}
+      \field{month}{03}
+      \field{title}{FishBase}
+      \field{year}{2014. version (02/2014)}
+      \verb{url}
+      \verb www.fishbase.org
+      \endverb
+    \endentry
+    \entry{fulton2003effect}{article}{}
+      \name{labelname}{3}{}{%
+        {{hash=cde1e71b3c6bcb80bbaeb0eb7dc68224}{Fulton}{F\bibinitperiod}{Elizabeth\bibnamedelima A}{E\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=e6f00aa89e61c51c521180dea70633f1}{Smith}{S\bibinitperiod}{Anthony\bibnamedelima DM}{A\bibinitperiod\bibinitdelim D\bibinitperiod}{}{}{}{}}%
+        {{hash=00e9dd64c4c61a10b6ca9148a8a6f408}{Johnson}{J\bibinitperiod}{Craig\bibnamedelima R}{C\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=cde1e71b3c6bcb80bbaeb0eb7dc68224}{Fulton}{F\bibinitperiod}{Elizabeth\bibnamedelima A}{E\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=e6f00aa89e61c51c521180dea70633f1}{Smith}{S\bibinitperiod}{Anthony\bibnamedelima DM}{A\bibinitperiod\bibinitdelim D\bibinitperiod}{}{}{}{}}%
+        {{hash=00e9dd64c4c61a10b6ca9148a8a6f408}{Johnson}{J\bibinitperiod}{Craig\bibnamedelima R}{C\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{d8d59f64ebc91b2636377a8a5ed72f63}
+      \strng{fullhash}{d8d59f64ebc91b2636377a8a5ed72f63}
+      \field{sortinit}{F}
+      \field{labeltitle}{Effect of complexity on marine ecosystem models}
+      \field{journaltitle}{Marine Ecology Progress Series}
+      \field{title}{Effect of complexity on marine ecosystem models}
+      \field{volume}{253}
+      \field{year}{2003}
+      \field{pages}{1\bibrangedash 16}
+    \endentry
+    \entry{link2010northeast}{article}{}
+      \name{labelname}{3}{}{%
+        {{hash=1416091dd66993b3a3cfbe72ac4a90d4}{Link}{L\bibinitperiod}{Jason\bibnamedelima S}{J\bibinitperiod\bibinitdelim S\bibinitperiod}{}{}{}{}}%
+        {{hash=cde1e71b3c6bcb80bbaeb0eb7dc68224}{Fulton}{F\bibinitperiod}{Elizabeth\bibnamedelima A}{E\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=085a0f0a3e9f786dace94c1c373df794}{Gamble}{G\bibinitperiod}{Robert\bibnamedelima J}{R\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=1416091dd66993b3a3cfbe72ac4a90d4}{Link}{L\bibinitperiod}{Jason\bibnamedelima S}{J\bibinitperiod\bibinitdelim S\bibinitperiod}{}{}{}{}}%
+        {{hash=cde1e71b3c6bcb80bbaeb0eb7dc68224}{Fulton}{F\bibinitperiod}{Elizabeth\bibnamedelima A}{E\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=085a0f0a3e9f786dace94c1c373df794}{Gamble}{G\bibinitperiod}{Robert\bibnamedelima J}{R\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{cf424c8d50c806b071b37d13113184d1}
+      \strng{fullhash}{cf424c8d50c806b071b37d13113184d1}
+      \field{sortinit}{L}
+      \field{labeltitle}{The northeast US application of ATLANTIS: a full system model exploring marine ecosystem dynamics in a living marine resource management context}
+      \field{journaltitle}{Progress in Oceanography}
+      \field{number}{1}
+      \field{title}{The northeast US application of ATLANTIS: a full system model exploring marine ecosystem dynamics in a living marine resource management context}
+      \field{volume}{87}
+      \field{year}{2010}
+      \field{pages}{214\bibrangedash 234}
+    \endentry
+    \entry{savina2008ecologically}{misc}{}
+      \name{labelname}{6}{}{%
+        {{hash=d6d008e4b6f42b2f9d72a0cafb7e36c6}{Savina}{S\bibinitperiod}{M}{M\bibinitperiod}{}{}{}{}}%
+        {{hash=88a0410bd35b49bee24ff338dd2a781a}{Fulton}{F\bibinitperiod}{E}{E\bibinitperiod}{}{}{}{}}%
+        {{hash=3cb6f123c0e712bd5e7f836dc97e3e71}{Condie}{C\bibinitperiod}{S}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=ce75430385393b6eb25f9340e020455c}{Forrest}{F\bibinitperiod}{RE}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=174f5c531c73b5f93cbc899ead820301}{Scandol}{S\bibinitperiod}{JP}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=3240e184ea3cad79239eba8937fe7a76}{Astles}{A\bibinitperiod}{K}{K\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{6}{}{%
+        {{hash=d6d008e4b6f42b2f9d72a0cafb7e36c6}{Savina}{S\bibinitperiod}{M}{M\bibinitperiod}{}{}{}{}}%
+        {{hash=88a0410bd35b49bee24ff338dd2a781a}{Fulton}{F\bibinitperiod}{E}{E\bibinitperiod}{}{}{}{}}%
+        {{hash=3cb6f123c0e712bd5e7f836dc97e3e71}{Condie}{C\bibinitperiod}{S}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=ce75430385393b6eb25f9340e020455c}{Forrest}{F\bibinitperiod}{RE}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=174f5c531c73b5f93cbc899ead820301}{Scandol}{S\bibinitperiod}{JP}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=3240e184ea3cad79239eba8937fe7a76}{Astles}{A\bibinitperiod}{K}{K\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{2}{%
+        {CSIRO}%
+        {NSW DPI Report}%
+      }
+      \strng{namehash}{06bf9cc1e79fe73a5dc6e3898a564a44}
+      \strng{fullhash}{6d0ab6558db9110ba4e4932a111cefa1}
+      \field{sortinit}{S}
+      \field{labeltitle}{Ecologically sustainable development of the regional marine and estuarine resources of NSW: Modelling of the NSW continental shelf ecosystem}
+      \field{title}{Ecologically sustainable development of the regional marine and estuarine resources of NSW: Modelling of the NSW continental shelf ecosystem}
+      \field{year}{2008}
+    \endentry
+    \entry{bormicon}{book}{}
+      \name{labelname}{2}{}{%
+        {{hash=e17a009eaba37bbb5e963f07ae3b458d}{Stef\'{a}nsson}{S\bibinitperiod}{Gunnar}{G\bibinitperiod}{}{}{}{}}%
+        {{hash=2a668a8b1e34b9f18130a6677950709f}{P\'{a}lsson}{P\bibinitperiod}{\'{O}lafur\bibnamedelima K.}{\~K\bibinitperiod}{}{}{}{}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=e17a009eaba37bbb5e963f07ae3b458d}{Stef\'{a}nsson}{S\bibinitperiod}{Gunnar}{G\bibinitperiod}{}{}{}{}}%
+        {{hash=2a668a8b1e34b9f18130a6677950709f}{P\'{a}lsson}{P\bibinitperiod}{\'{O}lafur\bibnamedelima K.}{\~K\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Marine Research Institute}%
+      }
+      \strng{namehash}{f51e6272e76113e4abc2c9b9421946b1}
+      \strng{fullhash}{f51e6272e76113e4abc2c9b9421946b1}
+      \field{sortinit}{S}
+      \field{labeltitle}{BORMICON: A Boreal Migration and Consumption model}
+      \field{title}{BORMICON: A Boreal Migration and Consumption model}
+      \field{year}{1997}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+
