@@ -2,8 +2,6 @@
 ######Christopher David Desjardins
 ######24 September 2014
 
-## Table of Conents
-
 ## Setting up the Modelling Domain
 
 Atlantis requires a special spatial file format. This is termed a *bgm* file (box geometry file). The *bgm* file defines the geometry (i.e. bathmetry) used in the Atlantis model. The *bgm* file stores the spatial information in *x* and *y* terms rather than latitude and longitude. Information about the projection (used in the visualization of the spatial data and for determining the day length), number of boxes, number of dynamic faces, maximum depth, vertical mixing and horizontal transport scalars, whether a box is a boundary box (i.e. is it dynamic, meaning does it border the open ocean) and the spatial layout of the boxes and  the faces (e.g. area, location of vertices, depth of box) are specified in the *bgm* file. 
@@ -23,6 +21,10 @@ On the CSIRO wiki, there are various tools to help generate a *bgm* file. In par
  The maximum depth for each box in the modelling domain was calculated using data  provided in `geo::gbdypi`. The depths of the boxes ranged from 100m to 3800m. Iceland and the Faroe Islands, while included in the modelling domain, were assigned a depth of 0 in the model in order to avoid having islands in the model
  
  For the Icelandic Atlantis model, the water column was split up into at most six water column layers: 0 - 50 m, 50 - 150 m, 150 - 300 m, 300 - 600m, 600 - 1000m, 1000m+ with one sediment layer. The size of these layers was selected after consultation with researchers at MRI and these layers are similar to depth layers reported Atlantis models (Link, Fulton, & Gamble, 2010[^8]; Savina, Fulton, Condie, Forrest, Scandol, & Astles, 2008[^9]).
+
+
+This is [an example][id] reference-style link.
+[id]: http://example.com/  "Optional Title Here"
 
 
 ## Biological Submodel
