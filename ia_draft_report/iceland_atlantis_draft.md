@@ -1,6 +1,6 @@
 # Iceland Atlantis Report (DRAFT)
 ######Christopher David Desjardins
-######24 September 2014
+######25 September 2014
 
 ## Setting up the Modelling Domain
 
@@ -39,13 +39,16 @@ According to the Icelandic Ministry of Fisheries, the stock size of ocean quahog
 
 #### Norway Lobster (*Nephrops norvegicus*)
 
-All information on Norway lobster, *Nephrops norvegicus*, come from Pampoulie et al. (2010)[^5], Eiriksson (1999)[^6], the Icelandic Ministry of Fisheries, and personal communcations with staff at the Marine Research Institute (MRI) in Reykjavík. Norway lobster are found exclusively in the south of Iceland at depths ranging from 100 - 300 meters (Eiriksson, 1999) preferring ocean temperatures of 6 - 9 celsius. They prefer soft bottom substrates (such as clay or sand), are endobenthic and feed on small benthic animals. They typically do not range more than 100 meters and there does not appear to be different genetic populations (Pampoulie et al. 2010). 
+All information on Norway lobster, *Nephrops norvegicus*, come from Pampoulie et al. (2010)[^5], Eiriksson (1999)[^6], the Icelandic Ministry of Fisheries, and personal communcations with staff at MRI in Reykjavík. Norway lobster are found exclusively in the south of Iceland at depths ranging from 100 - 300 meters (Eiriksson, 1999) preferring ocean temperatures of 6 - 9 celsius. They prefer soft bottom substrates (such as clay or sand), are endobenthic and feed on small benthic animals. They typically do not range more than 100 meters and there does not appear to be different genetic populations (Pampoulie et al. 2010). 
 
 Initial biomass estimates and spatial distribution comes from Jónas Jónasson at the MRI. Biomass in 1968 was used for Norway lobster, which was roughly the virgin biomass. This value was 30,940 tons and was distributed to **Atlantis** boxes proportionate to their reported landings. 
 
 #### Iceland Scallop (*Chlamys islandica*)
 
 The initial biomass for Iceland scallop was distributed to the Brieðafjorður region of the **Atlantis** model (i.e. box 31). This biomass was 100,000 tons. 
+
+#### Initial conditions for tracers with little or no data
+For tracers with no data, e.g. pelagic bacteria, sediment bacteria, sediment silica, seagrass, etc, initial conditions were taken from Savina et al. (2008)'s model. These tracers were updated after running **Atlantis**.  
 
 ## Equations
 ### Conversions
@@ -59,6 +62,25 @@ The following `R` function was used to convert tons to either mg N/m$$$^3$$$ (in
     }
 
 Where *unit* is either the area of the box or the volume of a layer. 
+
+#### Recruitment
+The typical Beverton-Holt recruitment model can be expressed as:
+
+$$ R = \frac{\alpha S}{1 + \frac{S}{K}}$$
+
+Where $$$\alpha$$$ is the maximum number of recruits per individual and $$$K$$$ is the spawning stock biomass at which recruitment is 1/2 maximum.
+
+In **Atlantis**, however, $$$\alpha$$$ represents the maximum number of recruits produced (units: individuals) and $$$\beta$$$ represents the spawning stock biomass at which recruitment is 1/2 maximum (units: mg N).
+
+$$ R = \frac{\alpha S}{\beta + S} $$
+
+Now if we let **Atlantis's** $$$\alpha$$$ and $$$\beta$$$ be represented as $$$\tilde{\alpha}$$$ and $$$\tilde{\beta}$$$ and set $$$\tilde{\alpha} = \alpha K$$$ and  $$$\tilde{\beta} = K$$$, respectively, then we can derive the typical formulation of the Beverton-Holt equation:
+
+$$ \frac{\tilde{\alpha} S}{\tilde{\beta} + S} = \frac{\alpha K S}{K + S} = \frac{\alpha S}{1 + S/K}$$
+
+Therefore, we see that **Atlantis's** $$$\alpha$$$ is really $$$\alpha K $$$ (i.e. $$$R\_{\infty}$$$) and $$$\beta$$$ is really $$$K$$$. 
+
+For cod, haddock, and saithe recruitment was initially calculated using MRI's recruitment and spawning stock biomass data. This data is available on [their website](http://data.hafro.is) in the *summary.csv* files for each of these species, respectively.
 
 ### Rate of Change Equations
 
