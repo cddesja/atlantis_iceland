@@ -8,7 +8,7 @@
 # Christopher David Desjardins
 
 # Constants
-k_scriptdir <- "~/Dropbox/hi/atlantis/ia_rscripts/"
+k_scriptdir <- "~/GitHub/atlantis_iceland/ia_rscripts/"
 k_datadir <- "~/Dropbox/hi/atlantis/hafro_data/"
 k_landings <- "init_conditions/"
 
@@ -21,7 +21,6 @@ library("dplyr")
 library("reshape2")
 library("sp")
 library("rgdal")
-library("gdata")
 
 # ------- #
 # Biomass #
@@ -109,6 +108,13 @@ length_abvb_nona <- filter(length_abvb, larett.opnun != "NA")
 
 # Get a list of the tegund ids
 ids <- unique(length_abvb_nona$tegund)
+
+# Calculate year abundance indices
+# abund_ind_yr <-
+#   length_abvb_nona %>%
+#     group_by(tegund, ar) %>%
+#     do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
+# saveRDS(abund_ind_yr,file = "yearly_biomass.Rds")
 
 #
 # Calculate abundance indices
