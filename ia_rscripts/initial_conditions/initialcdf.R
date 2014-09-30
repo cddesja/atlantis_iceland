@@ -109,12 +109,12 @@ length_abvb_nona <- filter(length_abvb, larett.opnun != "NA")
 # Get a list of the tegund ids
 ids <- unique(length_abvb_nona$tegund)
 
-# Calculate year abundance indices
-# abund_ind_yr <-
-#   length_abvb_nona %>%
-#     group_by(tegund, ar) %>%
-#     do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
-# saveRDS(abund_ind_yr,file = "yearly_biomass.Rds")
+# Calculate yearly abundance indices
+abund_ind_yr <-
+  length_abvb_nona %>%
+    group_by(tegund, ar, synis.id, box_id) %>%
+    do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
+#saveRDS(abund_ind_yr,file = "yearly_biomass.Rds")
 
 #
 # Calculate abundance indices
