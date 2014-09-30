@@ -27,3 +27,5 @@ saithe <- na.omit(saithe)
 S <- saithe$SSB
 R <- saithe$Recruitment
 bh_atl(R = saithe$Recruitment, S = saithe$SSB, recrwt = 0.99933498)  # need recruitment weight first
+
+
