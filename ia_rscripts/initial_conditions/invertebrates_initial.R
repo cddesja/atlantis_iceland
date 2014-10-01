@@ -4,17 +4,9 @@ library("dplyr")
 library("rgdal")
 
 # Functions
-source("Dropbox/hi/atlantis/ia_rscripts/atlantis_helpers.R")
+source("~/Github/iceland_atlantis/ia_rscripts/atlantis_helpers.R")
 
-#
-# Nephrops
-# 
-
-options(digits = 22)
-
-# Read in nephrops data from Jónas
-data <- read.csv(file = "~/Dropbox/hi/atlantis/hafro_data/nephrops/afli00.csv")
-
+# Box Areas
 # Find the areas from the BGM file
 bgm <- readLines("~/Dropbox/hi/atlantis/iceland_atlantis/atlantis_L93.bgm")
 match <- grep("area",bgm)
@@ -23,6 +15,18 @@ bgm_area <- strsplit(bgm_area, "\t")
 
 # Select the 2nd element from each list
 tot_area <- as.numeric(sapply(bgm_area, "[[", 2))
+
+# Digits to display
+options(digits = 22)
+
+# Inshore-ish boxes
+inshore <- c(5,6,7,18,16,15,36,35,34,31,32,30,20,21,22,51)  ## 51 b/c borders F.I.
+
+#
+# Nephrops
+# 
+# Read in nephrops data from Jónas
+data <- read.csv(file = "~/Dropbox/hi/atlantis/hafro_data/nephrops/afli00.csv")
 
 # Create a unique identifier
 data$id <- 1:nrow(data)
@@ -97,6 +101,103 @@ bio_box <- box_bio %>%
 areas <- bio_box$ids + 1
 
 wt <- tons_mgN(bio_box$tot_bio, tot_area[areas])
-template <- rep("_", 53)
-template[areas] <- wt
-cat(template,sep = ", ")
+dat <- data.frame(box = areas, wt = wt)
+init_cond_data(data = dat, nbox = 53, numlayer = 1, varname = "Scallop_N")
+
+# Cover
+dat <- data.frame(box = areas, wt = 0.01)
+init_cond_data(data = dat, nbox = 53, numlayer = 1, varname = "Scallop_Cover")
+
+#
+# Quahog
+#
+
+# Virgin biomass estimate
+wt <- 1.3e6  ## tons
+
+# Create proportions around Iceland
+props <- c(0.124, 0.076, 0.104, 0.088, 0.245, 0.116)
+props <- props/sum(props)
+loc <- c("NW", "N", "A", "W", "SW", "SA")
+prop_link <- c(rep(props[1], 2), props[2], rep(props[3], 3), props[4], rep(props[5],4), props[6]) 
+
+# Extract area of boxes
+boxs <- c(35, 34, 36, 15, 16, 18, 31, 20, 21, 22, 30, 5)
+loc <- c("NW", "NW", "N", "A", "A", "A", "W", "SW", "SW", "SW", "SW", "SA") 
+b_areas <- tot_area[boxs + 1]
+tmp <- data.frame(boxs, loc, areas = b_areas)
+tmp2 <- tmp %>%
+  group_by(loc) %>%
+  mutate(prop_area = areas/sum(areas))
+tmp2$prop <- prop_link
+tmp2$adj_prop <- tmp2$prop*tmp2$prop_area
+
+# Distribute the wt across the boxes
+tmp2$wt_box <- tmp2$adj_prop*wt
+
+nbox = 53
+numlayer = 1
+data <- dat
+# Calculate the N mg wt
+Nwt <- tons_mgN(tmp2$wt_box, b_areas)
+dat <- data.frame(box = boxs+1, wt = Nwt)
+init_cond_data(data = dat, nbox = 53, numlayer = 1, varname = "Quahog_N")
+
+# Cover
+dat <- data.frame(box = boxs+1, wt = 0.01)
+init_cond_data(data = dat, nbox = 53, numlayer = 1, varname = "Quahog_Cover")
+
+#
+# Other invertebrates and tracers
+#
+
+#
+# Macroalgae, use values from SETas of 0.5 and 100
+#
+
+# Cover
+dat <- data.frame(box = inshore+1, wt = 0.5)
+init_cond_data(data = dat, nbox = 53, numlayer = 1, varname = "Macroalgae_Cover")
+
+# N
+dat <- data.frame(box = inshore+1, wt = 1)
+init_cond_data(data = dat, nbox = 53, numlayer = 1, varname = "Macroalgae_N")
+
+#
+# Benthic carnivores - use values from SETas 
+#
+dat <- c("0.001,", " 0.001,", " 0.001,", " 0.001,", " 0.001,", " 0.001,", " 60\n")
+cat(rep(dat,53), sep = "")
+
+#
+# Benthic Grazer - SETas
+#
+dat <- data.frame(box = inshore+1, wt = 1)
+init_cond_data(data = dat, nbox = 53, numlayer = 1, varname = "Benthic_grazer_N")
+
+#
+# Filter_Other_Cover - SETas
+#
+dat <- data.frame(box = 1:53, wt = 0.03)
+init_cond_data(data = dat, nbox = 53, numlayer = 1, varname = "Filter_Other_Cover")
+
+dat <- data.frame(box = 1:53, wt = 5)
+init_cond_data(data = dat, nbox = 53, numlayer = 1, varname = "Filter_Other_N")
+
+#
+# Deposit_Feeder_N - SETas
+#
+dat <- c("0.001,", " 0.001,", " 0.001,", " 0.001,", " 0.001,", " 0.001,", " _\n")
+cat(rep(dat,53), sep = "")
+
+#
+# Megazoobenthos - SETas
+#
+dat <- data.frame(box = inshore+1, wt = 1)
+init_cond_data(data = dat, nbox = 53, numlayer = 1, varname = "Megazoobenthos_N")
+
+#
+# Gelatinous zoo - SETas
+#
+dat <- c("_,", " _,", " _,", " _,", " _,", " _,", " 0.0001\n")
+cat(rep(dat,53), sep = "")

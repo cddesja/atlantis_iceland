@@ -88,28 +88,21 @@ ssefcn <- function(beta, yrs, Y, I, plot.it = F){
 #' 
 #'Fill in initial conditions data for Atlantis
 #'
-#' @param dim Number of dimensions (2d, 2D, 3d, or 3D)
 #' @param nbox Number of boxes in the model.
 #' @param data Matrix or data.frame with two columns. First column corresponds to the box ID and the second to the data to be input.
 #' @param numlayer Number of layers for 3D tracer.
 #' @param varname Specify tracer name. Defaults to NULL. 
 #' 
-init_cond_data <- function(dim, nbox, data, numlayer, varname = NULL){
-  if(dim == "3d" | dim == "3d"){
-    tmp <- matrix(nrow = nbox, ncol = numlayer)
-    tmp[data[,1],1] <- data[,2]
-    tmp[is.na(tmp)] <- "_"
-    tmp <- paste(apply(tmp, 1, paste, collapse=", "), collapse=",\n")
-    if(is.null(varname)){
-      cat(tmp, " ;", sep ="")
+init_cond_data <- function(nbox, data, numlayer, varname = NULL){
+  tmp <- matrix(nrow = nbox, ncol = numlayer)
+  tmp[data[,1],1] <- data[,2]
+  tmp[is.na(tmp)] <- "_"
+  if(numlayer == 1){
+    tmp <- paste(apply(tmp, 1, paste, collapse=", "), collapse=", ")
+  } else tmp <- paste(apply(tmp, 1, paste, collapse=", "), collapse=",\n")
+  if(is.null(varname)){
+    cat(tmp, " ;", sep ="")
     } else cat(varname, " =\n", tmp, " ;", sep ="")
-    } else if(dim == "2d" | dim == "2d"){
-    tmp <- c(rep("_, ", nbox-1), "_ ;")
-    tmp[data[,1]] <- data[,2]
-    if(is.null(varname)){
-    cat(tmp, sep ="")
-    } else cat(varname, " =\n", tmp, sep ="")
-  } else print("Not a valid dimension option")
 }        
 
 #'
