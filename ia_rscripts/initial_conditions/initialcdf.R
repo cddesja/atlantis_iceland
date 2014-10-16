@@ -110,85 +110,24 @@ length_abvb_nona <- filter(length_abvb, larett.opnun != "NA")
 ids <- unique(length_abvb_nona$tegund)
 
 # Calculate yearly abundance indices
-abund_ind_yr <-
-  length_abvb_nona %>%
-    group_by(tegund, ar, synis.id, box_id) %>%
-    do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
-#saveRDS(abund_ind_yr,file = "yearly_biomass.Rds")
+# abund_ind_yr <-
+#   length_abvb_nona %>%
+#     group_by(tegund, ar, synis.id, box_id) %>%
+#     do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
+# saveRDS(abund_ind_yr,file = "yearly_biomass.Rds")
 
 #
 # Calculate abundance indices
 #
-# s03 <- filter(length_abvb_nona, tegund %in% ids[1:4])
-# s00 <- filter(length_abvb_nona, tegund %in% ids[5:10])
-# s10 <- filter(length_abvb_nona, tegund %in% ids[11:20])
-# s20 <- filter(length_abvb_nona, tegund %in% ids[21:30])
-# s30 <- filter(length_abvb_nona, tegund %in% ids[31:40])
-# s40 <- filter(length_abvb_nona, tegund %in% ids[41:50])
-# s50 <- filter(length_abvb_nona, tegund %in% ids[51:60])
-# s60 <- filter(length_abvb_nona, tegund %in% ids[61:70])
-# s70 <- filter(length_abvb_nona, tegund %in% ids[71:80])
-# s80 <- filter(length_abvb_nona, tegund %in% ids[81:89])
-# 
-# abund_ind_s03 <-
-#   s03 %>%
-#   group_by(tegund, synis.id, box_id) %>%
-#   do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
-# abund_ind_s00 <-
-#   s00 %>%
-#   group_by(tegund, synis.id, box_id) %>%
-#   do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
-# abund_ind_s10 <-
-#   s10 %>%
-#   group_by(tegund, synis.id, box_id) %>%
-#   do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
-# abund_ind_s20 <-
-#   s20 %>%
-#   group_by(tegund, synis.id, box_id) %>%
-#   do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
-# abund_ind_s30 <-
-#   s30 %>%
-#   group_by(tegund, synis.id, box_id) %>%
-#   do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
-# abund_ind_s40 <-
-#   s40 %>%
-#   group_by(tegund, synis.id, box_id) %>%
-#   do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
-# abund_ind_s50 <-
-#   s50 %>%
-#   group_by(tegund, synis.id, box_id) %>%
-#   do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
-# abund_ind_s60 <-
-#   s60 %>%
-#   group_by(tegund, synis.id, box_id) %>%
-#   do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
-# abund_ind_s70 <-
-#   s70 %>%
-#   group_by(tegund, synis.id, box_id) %>%
-#   do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
-# abund_ind_s80 <-
-#   s80 %>%
-#   group_by(tegund, synis.id, box_id) %>%
-#   do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
-# 
-# abund_ind <- rbind(abund_ind_s03,
-#   abund_ind_s00,
-#   abund_ind_s10,
-#   abund_ind_s20,
-#   abund_ind_s30,
-#   abund_ind_s40,
-#   abund_ind_s50,
-#   abund_ind_s60,
-#   abund_ind_s70,
-#   abund_ind_s80)
-# 
-# 
-# # Save abundance estimate
-# saveRDS(abund_ind, file = "abund_ind_17sept2014.rds")
+abund_ind <- length_abvb_nona %>%
+  group_by(tegund, synis.id, box_id) %>%
+  do(data.frame(biomass = sum(.$fj.alls * (.$a * .$lengd^.$b))))
+
+# Save abundance estimate
+saveRDS(abund_ind, file = "abund_ind_14oct2014.rds")
 
 # Read in abundance estimate
-abund_ind <- readRDS(file = "abund_ind_17sept2014.rds")
-
+abund_ind <- readRDS(file = "abund_ind_14oct2014.rds")
 
 # Select on long/lat and towing width
 ll_tow <- select(length_abvb_nona, synis.id, tegund, larett.opnun, box_id)
@@ -209,7 +148,7 @@ abund_index <- merge(abund_index, fiskur)
 # Calculate ave abund by tegund first
 ai_atl <- abund_index %>%
   group_by(box_id, tegund) %>%
-  summarize(ai = mean(bio_indx))
+  summarize(ai = max(bio_indx))
 
 # Read in size of the boxes from the BGM file
 bgm <- readLines("../iceland_atlantis/atlantis_L93.bgm")
@@ -240,7 +179,7 @@ tot_abund <-
 tot_abund$ttons <- tot_abund$tots/1000
 options(scipen = 999)
 initial_abund <- left_join(tot_abund, fiskur)
-#write.csv(initial_abund, file = "initial_conds.csv")
+write.csv(initial_abund, file = "initial_conds.csv")
 
 #
 # Fall for FGH and FDR
