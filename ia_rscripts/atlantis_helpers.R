@@ -140,7 +140,7 @@ bh_atl <- function(R, S, recrwt, plot.it = TRUE){
   atlantis_beta = tons_mgN(K,1)
   if(plot.it){
     plot(S,R,xlim=c(0,max(S)),ylim=c(0,max(R)),xlab="SSB",ylab="Recruitment")
-    Srange<-(0:120)*30
+    Srange<-(0:120)*60
     Rrange<-alpha0*Srange/(1+Srange/K0) # For B-H
     lines(Srange,Rrange,lwd=2, col='green') 
     Rrange <- alpha*Srange/(1+Srange/K) # For B-H

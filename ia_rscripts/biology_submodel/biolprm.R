@@ -18,7 +18,7 @@ library("maptools")
 k_dir <- "~/Dropbox/hi/atlantis/hafro_data/"
 
 # Read in biology parameter prm
-k_bio <- "~/Dropbox/hi/atlantis/iceland_atlantis/iceland_biol_updated.prm"
+k_bio <- "~/Dropbox/hi/atlantis/iceland_atlantis/iceland_biol.prm"
 bio_params <- readLines(k_bio)
 write(bio_params, file = "~/Dropbox/hi/atlantis/iceland_atlantis/iceland_biol_backup.prm")
 
@@ -43,6 +43,8 @@ kv_df <- tbl_df(all.kv)
 
 # Join these tables by synis.id
 kv_st <- inner_join(stodvar_df, kv_df)
+
+rm(stodvar_df, kv_df)
 
 # 
 # Weight-Length Allometric Formula
@@ -112,6 +114,29 @@ cat(paste("li_a_", wl.fg$Code, " ", wl.fg$a,
 cat(paste("li_b_", wl.fg$Code, " ", wl.fg$b,
           " Coefficient of allometic length-weight relation for ",
           wl.fg$Code, "\n", sep = ""), sep ="")
+
+#
+# Lmax
+#
+
+lmax <- kv_st %>%
+  group_by(tegund) %>%
+  summarize(max_length = max(lengd))
+
+lmax_match <- inner_join(lmax, hafro_link)
+write.csv(lmax_match, file = "lmax.csv")
+
+#
+# Tmax
+#
+
+tmax <- kv_st %>%
+  group_by(tegund) %>%
+  summarize(max_aldur = max(aldur, na.rm = T))
+
+tmax_match <- inner_join(tmax, hafro_link)
+write.csv(tmax_match, file = "tmax.csv")
+
 
 #
 # von Bertalanffy parameters 
