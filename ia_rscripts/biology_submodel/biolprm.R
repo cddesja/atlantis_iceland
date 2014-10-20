@@ -44,8 +44,6 @@ kv_df <- tbl_df(all.kv)
 # Join these tables by synis.id
 kv_st <- inner_join(stodvar_df, kv_df)
 
-rm(stodvar_df, kv_df)
-
 # 
 # Weight-Length Allometric Formula
 #
@@ -381,6 +379,20 @@ wts_unique$unq <- paste(wts_unique$Code, wts_unique$box_id, sep = "")
 
 box_id <- 0:52
 
+bgm <- readLines("~/Dropbox/hi/atlantis/iceland_atlantis/atlantis_L93.bgm")
+botz <- grep("botz",bgm)
+bgm_botz <- bgm[botz]
+bgm_botz <- strsplit(bgm_botz, "\t")
+botz <-sapply(bgm_botz,`[`,2)
+area <- grep("area",bgm)
+bgm_area <- bgm[area]
+bgm_area <- strsplit(bgm_area, "\t")
+area <- sapply(bgm_area,`[`,2)
+botz <- botz[-1]
+
+saveRDS(wts_unique, file = "~/Dropbox/hi/atlantis/hafro_data/wts_unique.rds")
+wts_unique <- readRDS(file = "~/Dropbox/hi/atlantis/hafro_data/wts_unique.rds")
+
 #
 # 1st half, adults
 #
@@ -480,6 +492,131 @@ for(i in 1:length(juv)){
 write(bio_params, file = k_bio)
 
 #
+# FDF, PID, FSD, FDL, FMP, SSD, SSH, SSR
+# FBP must be handled seperately
+
+codes <- c("FDF", "PID","FSD", "FDL", "FMP", "SSD", "SSH", "SSR")
+# Read in the data
+box_assign <- readRDS(file = "~/Dropbox/hi/atlantis/hafro_data/boxid_survey.Rds")
+
+# Join stodvar and box_assign
+st_box <- inner_join(box_assign, stodvar_df, by = "synis.id")
+
+# Remove box IDs that are boundary
+boundaries <- c("44","45", "46", "47", "48", "49", "50", "0", "2", "3", "26", "27", "28", "41", "42", "19", "52")
+st_box <- filter(st_box, !(box_id %in% boundaries))
+
+# Calculate the weights 
+wts <- st_box %>%
+  group_by(box_id) %>%
+  summarize(num = length(synis.id))
+
+wts <- left_join(wts_box_qt, wts_qt, by = "half")
+wts$weights <- wts$num/sum(wts$num)
+wts_tmp <- merge(st_box, wts)
+
+## Merge this with the all.kv
+all_kv <- tbl_df(all.kv)
+wts_kv <- left_join(wts_tmp, all_kv)
+wts_kv <- left_join(wts_kv, hafro_link)
+wts_kv <- filter(wts_kv, Code %in% codes)
+
+## Calculate how many species by box
+sp_qt <- wts_kv %>%
+  group_by(Code, box_id) %>%
+  summarize(nums = length(lengd))
+
+# Select only the variables needed from wts_kv
+kv_sub <- select(wts_kv, box_id, Code, weights)
+
+# Merge these together
+wt_sp <- inner_join(sp_qt, kv_sub, by = c("box_id", "Code"))
+
+# Take only the unique rows
+wts_unique <- unique(wt_sp)
+
+# Multiply numbers by weights
+wts_unique$wt_num <- wts_unique$nums*wts_unique$weights
+wts_unique <- na.omit(wts_unique)
+
+wts_unique <- wts_unique %>%
+  group_by(Code) %>%
+  mutate(prop_box = wt_num/sum(wt_num))
+
+wts_unique <- wts_unique[order(wts_unique$Code,wts_unique$box_id),]
+wts_unique$unq <- paste(wts_unique$Code, wts_unique$box_id, sep = "")
+
+ids <- rep(unique(wts_unique$Code),each = length(box_id))
+prop_data <- data.frame(Code = ids,box_id = box_id, perc = 0)
+prop_data$unq <-paste(prop_data$Code, prop_data$box_id, sep = "")
+
+wts_adults <- wts_unique
+
+for(i in 1:nrow(wts_adults)){
+  prop_data$perc[which(wts_adults$unq[i] == prop_data$unq)] = wts_adults$prop_box[i]
+}
+prop_data$Code <- droplevels(prop_data$Code)
+
+species_split <- split(prop_data, prop_data$Code)
+for(i in 1:length(species_split)){
+  match_a1 <- grep(paste("FFBP_S1 53", sep = ""), bio_params)
+  match_a2 <- grep(paste("FFBP_S2 53", sep = ""), bio_params)
+  match_a3 <- grep(paste("FFBP_S3 53", sep = ""), bio_params)
+  match_a4 <- grep(paste("FFBP_S4 53", sep = ""), bio_params)
+  match_j1 <- grep(paste("FFBP_S1juv 53", sep = ""), bio_params)
+  match_j2 <- grep(paste("FFBP_S2juv 53", sep = ""), bio_params)
+  match_j3 <- grep(paste("FFBP_S3juv 53", sep = ""), bio_params)
+  match_j4 <- grep(paste("FFBP_S4juv 53", sep = ""), bio_params)
+  dist <- species_split[[i]]$perc
+  bio_params[match_a1 + 1] <- paste(dist, collapse = " ") 
+  bio_params[match_a2 + 1] <- paste(dist, collapse = " ") 
+  bio_params[match_a3 + 1] <- paste(dist, collapse = " ") 
+  bio_params[match_a4 + 1] <- paste(dist, collapse = " ") 
+  bio_params[match_j1 + 1] <- paste(dist, collapse = " ") 
+  bio_params[match_j2 + 1] <- paste(dist, collapse = " ") 
+  bio_params[match_j3 + 1] <- paste(dist, collapse = " ") 
+  bio_params[match_j4 + 1] <- paste(dist, collapse = " ") 
+}
+
+write(bio_params, file = k_bio)
+
+# FBP, put 90% of the FBP in boxes deeper than 90% and then distribute the other 10%. Evenly 
+# within both
+
+boundaries <- c(44, 45, 46, 47, 48, 49, 50, 0, 2, 3, 26, 27, 28, 41, 42, 19, 52)
+boundaries <- boundaries + 1
+botz <- as.numeric(as.character(botz))
+botz[boundaries] <- 999
+area <- as.numeric(as.character(area))
+deeper_1000 <- which(botz < -1000)
+deep_prop <- area[deeper_1000]/sum(area[deeper_1000])*.9
+
+shallow_1000 <- which(botz < -300 & botz > -1000)
+shallow_prop <- area[shallow_1000]/sum(area[shallow_1000])*.1
+values <- rep(0, length(botz))
+values[deeper_1000] <- deep_prop
+values[shallow_1000] <- shallow_prop
+
+match_a1 <- grep(paste("FFBP_S1 53", sep = ""), bio_params)
+match_a2 <- grep(paste("FFBP_S2 53", sep = ""), bio_params)
+match_a3 <- grep(paste("FFBP_S3 53", sep = ""), bio_params)
+match_a4 <- grep(paste("FFBP_S4 53", sep = ""), bio_params)
+match_j1 <- grep(paste("FFBP_S1juv 53", sep = ""), bio_params)
+match_j2 <- grep(paste("FFBP_S2juv 53", sep = ""), bio_params)
+match_j3 <- grep(paste("FFBP_S3juv 53", sep = ""), bio_params)
+match_j4 <- grep(paste("FFBP_S4juv 53", sep = ""), bio_params)
+bio_params[match_a1 + 1] <- paste(values, collapse = " ") 
+bio_params[match_a2 + 1] <- paste(values, collapse = " ") 
+bio_params[match_a3 + 1] <- paste(values, collapse = " ") 
+bio_params[match_a4 + 1] <- paste(values, collapse = " ") 
+bio_params[match_j1 + 1] <- paste(values, collapse = " ") 
+bio_params[match_j2 + 1] <- paste(values, collapse = " ") 
+bio_params[match_j3 + 1] <- paste(values, collapse = " ") 
+bio_params[match_j4 + 1] <- paste(values, collapse = " ") 
+
+write(bio_params, file = k_bio)
+
+#
 # Cephlapods
 #
 
@@ -540,5 +677,52 @@ bio_params[match_s1j + 1] <- paste(dist, collapse = " ")
 bio_params[match_s2j + 1] <- paste(dist, collapse = " ") 
 bio_params[match_s3j + 1] <- paste(dist, collapse = " ") 
 bio_params[match_s4j + 1] <- paste(dist, collapse = " ") 
+
+write(bio_params, file = k_bio)
+
+#
+# Vertical distribution
+#
+vert_dist_data <- select(kv_st, dypi, tegund, synis.id)
+vert_dist_data <- inner_join(vert_dist_data,hafro_link)
+vert_dist_data <- na.omit(vert_dist_data)
+rm(kv_st, kv_df, stodvar_df)  # clean up the memory
+vert_dist <- vert_dist_data %>% 
+  group_by(Code) %>%
+  summarize(b1 = round(sum(dypi > 1000)/length(dypi), digits = 3),
+            b2 = round(sum(dypi > 600 & dypi <= 1000)/length(dypi), digits = 3),
+            b3 = round(sum(dypi > 300 & dypi <= 600)/length(dypi), digits = 3),
+            b4 = round(sum(dypi > 150 & dypi <= 300)/length(dypi), digits = 3),
+            b5 = round(sum(dypi > 50 & dypi <= 150)/length(dypi), digits = 3),
+            b6 = round(sum(dypi > 0 & dypi <= 50)/length(dypi), digits = 3),
+            total = b1 + b2 + b3 + b4+ b5 + b6)
+table(vert_dist$total)
+(match <- which(vert_dist$total == "0.999"))
+
+for(i in 1:nrow(vert_dist)){
+  if(vert_dist$total[i] == "1.001"){
+    match <- which.max(vert_dist[i,-c(1,8)])
+    vert_dist[i, match + 1] = vert_dist[i, match + 1] - .001
+  }
+  if(vert_dist$total[i] == "0.999"){
+    match <- which.max(vert_dist[i,-c(1,8)])
+    vert_dist[i, match + 1] = vert_dist[i, match + 1] + .001
+  }  
+  if(vert_dist$total[i] == "0.997"){
+    match <- which.max(vert_dist[i,-c(1,8)])
+    vert_dist[i, match + 1] = vert_dist[i, match + 1] + .003
+  }  
+  print(i)
+}    
+
+# Drop FAF & total
+vert_dist <- vert_dist[-1, -8]
+for(i in 1:nrow(vert_dist)){
+  match_day <- grep(paste("VERTday_",vert_dist$Code[i], sep = ""), bio_params)
+  match_night <- grep(paste("VERTnight_",vert_dist$Code[i], sep = ""), bio_params)
+  match <- c(match_day,match_night) + 1
+  bio_params[match] <- paste(vert_dist[i,2:7], collapse = " ")
+  cat("###", paste(vert_dist$Code[i]), "updated ###\n")
+}
 
 write(bio_params, file = k_bio)

@@ -1,6 +1,8 @@
 # Iceland Atlantis Report (DRAFT)
 ######Christopher David Desjardins
-######25 September 2014
+######20 October 2014
+
+*Math mode disabled while drafting*
 
 ## Setting up the Modelling Domain
 
@@ -23,13 +25,14 @@ On the CSIRO wiki, there are various tools to help generate a *bgm* file. In par
  For the Icelandic Atlantis model, the water column was split up into at most six water column layers: 0 - 50 m, 50 - 150 m, 150 - 300 m, 300 - 600m, 600 - 1000m, 1000m+ with one sediment layer. The size of these layers was selected after consultation with researchers at MRI and these layers are similar to depth layers reported Atlantis models (Link, Fulton, & Gamble, 2010[^8]; Savina, Fulton, Condie, Forrest, Scandol, & Astles, 2008[^9]).
 
 
-This is [an example][id] reference-style link.
-[id]: http://example.com/  "Optional Title Here"
-
-
 ## Biological Submodel
 
 ### Functional Groups
+
+##### Pinnepids 
+The pinnepid group (PIN) consists of the two breeding Icelandic seal species: grey seal, *Halichoerus grypus*, and the common (or harbour) seal, *Phoca vitulina*. Data for the grey seal come largely from Hauksson (2007a)[^10] and Hauksson (2007b)[^11]. Data on abundance and basic biology can be found in Hauksson (2007a) and data on von-Bertalanffy and weight-allometric growth parameters can be found in Hauksson (2007b). Grey seals breed between the middle of September to early November in colones along the southeast and northwest coasts. During other times of the year, grey seals are found throughout Iceland but are at higher densities off the west, northwest, and southeast coasts (Hauksson, 2007a). Grey seals were estimated to number around 4000 to 5000 in the 1960s, 8,000 to 11,500 in 1982, and 4,100 to 5,900 in 2002 (Hauksson, 2007a). Changes in population size appear to be associated with an increase of breeding land as people moved from the countryside in the 60s and the recent declines appears to be associated with increased fishing (Hauksson, 2007a).   
+
+Information on harbour seals come from Hauksson & Einarsson (2010)[^12].
 
 #### Ocean Quahog (*Arctica islandica*)
 
@@ -39,7 +42,7 @@ According to the Icelandic Ministry of Fisheries, the stock size of ocean quahog
 
 #### Norway Lobster (*Nephrops norvegicus*)
 
-All information on Norway lobster, *Nephrops norvegicus*, come from Pampoulie et al. (2010)[^5], Eiriksson (1999)[^6], the Icelandic Ministry of Fisheries, and personal communcations with staff at MRI in Reykjavík. Norway lobster are found exclusively in the south of Iceland at depths ranging from 100 - 300 meters (Eiriksson, 1999) preferring ocean temperatures of 6 - 9 celsius. They prefer soft bottom substrates (such as clay or sand), are endobenthic and feed on small benthic animals. They typically do not range more than 100 meters and there does not appear to be different genetic populations (Pampoulie et al. 2010). 
+All information on Norway lobster, *Nephrops norvegicus*, come from Pampoulie et al. (2010)[^5], Eiriksson (1999)[^6], the Icelandic Ministry of Fisheries, and personal communcations with staff at MRI in Reykjavík. Norway lobster are found exclusively in the south of Iceland at depths ranging from 100 - 300 meters (Eiriksson, 1999) preferring ocean temperatures of 6 - 9 celsius. They prefer soft bottom substrates (such as clay or sand), are endobenthic and feed on small benthic animals. They typically do not range more than 100 meters and there does not appear to be different genetic populations (Pampoulie et al. 2010)[@10]. 
 
 Initial biomass estimates and spatial distribution comes from Jónas Jónasson at the MRI. Biomass in 1968 was used for Norway lobster, which was roughly the virgin biomass. This value was 30,940 tons and was distributed to **Atlantis** boxes proportionate to their reported landings. 
 
@@ -141,6 +144,12 @@ $$\frac{d(NH\_3)}{dt} = - \sum_{}  $$
 
 [^6]: Eiriksson, H. (1999). Spatial variabilities of CPUE and mean size as possible criteria for unit stock demarcations in analytical assessments of Nephrops at Iceland. *Rit Fiskideild*, 16, 239-246.
 
+[^10]: Hauksson, E. (2007a). Abundance of grey seals in Icelandic waters, based on trends of pup-counts from aerial surveys. *NAMMCO Scientific Publications*, 6, 85 - 97.
+
+[^11]: Hauksson, E. (2007b). Growth and reproduction in the Icelandic grey seal. *NAMMCO Scientific Publications*, 6, 153 - 161.
+
+[^12]: Hauksson, E. & Einarsson, S. T. (2010). Review on utilization and research on harbour seal (*Phoca vitulina*) in Iceland. *NAMMCO Scientific Publications*, 8, 341 - 353.
+
 [^8]: Link, J. S., Fulton, E. A., & Gamble, R. J. (2010). The northeast US application of ATLANTIS: a full system model exploring marine ecosystem dynamics in a living marine resource management context. *Progress in Oceanography*, 87(1), 214-234.
 
 [^5]: Pampoulie, C., Skirnisdottir, S., Hauksdottir, S., Olafsson, K., Eiríksson, H., Chosson, V., ... & Hjorleifsdottir, S. (2010). A pilot genetic study reveals the absence of spatial genetic structure in Norway lobster (*Nephrops norvegicus*) on fishing grounds in Icelandic waters. *ICES Journal of Marine Science*, 68(1), 20 - 25.
@@ -150,7 +159,6 @@ $$\frac{d(NH\_3)}{dt} = - \sum_{}  $$
 [^1]: Thorarinsdottir, G. G, & Einarsson, S.T. (1996). Distribution, abundance, population structure and meat yield of the ocean quahog *Arctica islandica*, in Icelandic waters. *Journal of the Marine Biological Association of the United Kingdom*, 76(04), 1107 – 1114.
 
 [^2]: Thorarinsdóttir, G. G., & Jacobson, L. D. (2005). Fishery biology and biological reference points for management of ocean quahogs (*Arctica islandica*) off Iceland. *Fisheries Research*, 75(1), 97-106.
-
 
 
 
