@@ -1,6 +1,6 @@
 # Iceland Atlantis Report (DRAFT)
 ######Christopher David Desjardins
-######20 October 2014
+######21 October 2014
 
 *Math mode disabled while drafting*
 
@@ -30,15 +30,15 @@ On the CSIRO wiki, there are various tools to help generate a *bgm* file. In par
 ### Functional Groups
 
 ##### Pinnepids 
-The pinnepid group (PIN) consists of the two breeding Icelandic seal species: grey seal, *Halichoerus grypus*, and the common (or harbour) seal, *Phoca vitulina*. Data for the grey seal come largely from Hauksson (2007a)[^10] and Hauksson (2007b)[^11]. Data on abundance and basic biology can be found in Hauksson (2007a) and data on von-Bertalanffy and weight-allometric growth parameters can be found in Hauksson (2007b). Grey seals breed between the middle of September to early November in colones along the southeast and northwest coasts. During other times of the year, grey seals are found throughout Iceland but are at higher densities off the west, northwest, and southeast coasts (Hauksson, 2007a). Grey seals were estimated to number around 4000 to 5000 in the 1960s, 8,000 to 11,500 in 1982, and 4,100 to 5,900 in 2002 (Hauksson, 2007a). Changes in population size appear to be associated with an increase of breeding land as people moved from the countryside in the 60s and the recent declines appears to be associated with increased fishing (Hauksson, 2007a).   
+The pinnepid group (PIN) consists of the two breeding Icelandic seal species: grey seal, *Halichoerus grypus*, and the common (or harbour) seal, *Phoca vitulina*. Data for the grey seal come largely from Hauksson (2007a)[^10] and Hauksson (2007b)[^11]. Data on abundance and basic biology can be found in Hauksson (2007a) and data on von-Bertalanffy and weight-allometric growth parameters can be found in Hauksson (2007b). Grey seals breed between the middle of September to early November in colones along the southeast and northwest coasts. During other times of the year, grey seals are found throughout Iceland but are at higher densities off the west, northwest, and southeast coasts (Hauksson, 2007a). Grey seals were estimated to number around 4000 to 5000 in the 1960s, 8,000 to 11,500 in 1982, and 4,100 to 5,900 in 2002 (Hauksson, 2007a). Changes in population size appear to be associated with an increase of breeding land as people moved from the countryside in the 60s and the recent declines appears to be associated with increased fishing (Hauksson, 2007a). Given that the Icelandic Atlantis model is starting in 1948, the population size of 5,000 was used initially for grey seals.    
 
-Information on harbour seals come from Hauksson & Einarsson (2010)[^12].
+Information on harbour seals come from Hauksson & Einarsson (2010a)[^hauksson2010historical], Hauksson & Einarsson (2010b)[^12], Lydersen & Kovacs (2005)[^lydersen2005growth]. Lydersen & Kovacs (2005) provided growth parameters for the Svalbard population of harbour seals. This information was used for the Icelandic population as these data were not available. Natural mortality for pinnepids was set to .1425 based on previous studies (reported in Hauksson & Einarsson, 2010a).
 
 #### Ocean Quahog (*Arctica islandica*)
 
 Information on ocean quahog comes from Thorarinsdottir & Einarsson (1996)[^1], Thorarinsdottir & Jacobson (2005)[^2], the Icelandic Ministry of Fisheries[^3], and NOAA[^4].The ocean quahog is a long-lived (up to 400 years) bivalve occupying depths of 4 meters down to approximately 400 meters with depths up to 256 meters reported for Iceland (Thorarinsdottir & Einarsson, 1996). The majority of the catches in Iceland are reported between 5 and 50 meters (Thorarinsdottir & Jacobson, 2005).  They inhabit soft, sandy soil where they are endobenthic and filter-feed on phytoplankton and detritus. They typically avoid gravel areas and have very slow recruitment. Males may mature as early as 10 years (49 mm shell length) and females may mature as early as 13 years (44 mm shell length) (citation in Thorarinsdottir & Jacobson, 2005). Spawning in Iceland peaks between June - July but occurs all year round (citation in Thorarinsdottir & Jacobson, 2005). Larvae are planktonic for 4 - 6 weeks and settlement peaks off Iceland during August. Recruitment has occurred every year since 2002 in Icleand but recruitment appears to peak every 20 years (citation in Thorarinsdottir & Jacobson, 2005). They are a cold-water invertebrate (could be affected by global warming?) and can tolerate temperates up to 12 celsius in Iceland (Thorarinsdottir & Jacobson, 2005).
 
-According to the Icelandic Ministry of Fisheries, the stock size of ocean quahog in Icelandic waters is estimated at over 1 million tons with mean densities of 3.0 (+/- 0.3 SE), 2.8 (+/- 0.6 SE), and 4.2 (+/- 0.5 SE) kg/m$^2$ in the north-west, north, and east regions of Iceland (Thorarinsdottir & Einarsson, 1996).
+According to the Icelandic Ministry of Fisheries, the stock size of ocean quahog in Icelandic waters is estimated at over 1 million tons with mean densities of 3.0 (+/- 0.3 SE), 2.8 (+/- 0.6 SE), and 4.2 (+/- 0.5 SE) kg/m$^2$ in the north-west, north, and east regions of Iceland (Thorarinsdottir & Einarsson, 1996). 
 
 #### Norway Lobster (*Nephrops norvegicus*)
 
@@ -133,6 +133,21 @@ Rates of change for ammonia and nitrate are:
 
 $$\frac{d(NH\_3)}{dt} = - \sum_{}  $$
 
+#### Energy requirement equations
+
+The following equations were used to collect daily energy requirements for birds and mammals. These equations were reported in Hunt, Kato, & McKinnell (2000)[^hunt2000predation].
+
+For birds:
+
+$$ E = \exp{\left(3.24 + .727\log M\right)}$$ 
+
+For mammals: 
+
+$$ E = \exp{\left(a + 0.75 \log M\right)}$$
+
+Where *E* corresponds to energy requirement per day (kcal/day), *M* is mean body weight (kg), and *a* is 317 for toothed whales, 192 for baleen whales, 372 for otariid seals, and 200 for phocid seals. This was then converted to kj/day (1 kcal = 4.186 kj).
+
+
 **SHOULD FINISH THIS LATER BUT THE CRUMMY NOTATION KILLS ME :(**
 
 ## References
@@ -148,9 +163,15 @@ $$\frac{d(NH\_3)}{dt} = - \sum_{}  $$
 
 [^11]: Hauksson, E. (2007b). Growth and reproduction in the Icelandic grey seal. *NAMMCO Scientific Publications*, 6, 153 - 161.
 
-[^12]: Hauksson, E. & Einarsson, S. T. (2010). Review on utilization and research on harbour seal (*Phoca vitulina*) in Iceland. *NAMMCO Scientific Publications*, 8, 341 - 353.
+[^hauksson2010historical]: Hauksson, E. & Einarsson, S. T. (2010a). Historical trend in harbour seal (*Phoca vitulina*) abundance in Iceland back to the year 1912. 
+
+[^12]: Hauksson, E. & Einarsson, S. T. (2010b). Review on utilization and research on harbour seal (*Phoca vitulina*) in Iceland. *NAMMCO Scientific Publications*, 8, 341 - 353.
+
+[^hunt2000predation]: Hunt, G. L., Kato, H., & McKinnell, S. M. (Eds.). (2000). Predation by marine birds and mammals in the subarctic North Pacific Ocean. North Pacific Marine Science Organization.
 
 [^8]: Link, J. S., Fulton, E. A., & Gamble, R. J. (2010). The northeast US application of ATLANTIS: a full system model exploring marine ecosystem dynamics in a living marine resource management context. *Progress in Oceanography*, 87(1), 214-234.
+
+[^lydersen2005growth]: Lydersen, C. & Kovacs, K. M. (2005). Growth and population parameters of the world's northernmost harbour seals *Phoca vitulina* residing in Svalbard, Norway. 
 
 [^5]: Pampoulie, C., Skirnisdottir, S., Hauksdottir, S., Olafsson, K., Eiríksson, H., Chosson, V., ... & Hjorleifsdottir, S. (2010). A pilot genetic study reveals the absence of spatial genetic structure in Norway lobster (*Nephrops norvegicus*) on fishing grounds in Icelandic waters. *ICES Journal of Marine Science*, 68(1), 20 - 25.
 
