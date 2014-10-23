@@ -28,6 +28,9 @@ vert_codes <- codes[1:34]
 # Need to omit FPO and FPI
 vert_codes <- factor(vert_codes[-c(24, 25)])
 
+# Read in the Vert_Statistics tab
+vert_stats <- read.xls(xls = paste(k_wdir, k_name, sep = ""), sheet = "Vert_Statistics", blank.lines.skip = FALSE)
+
 # Read in all sheets
 ia_sheets <- list()
 for(i in 1:length(vert_codes)){
@@ -108,4 +111,23 @@ for(i in 1:length(ia_sheets)){
 # Write changes to the updated bio params file
 write(bio_params, file = k_bio)
 
+#
+# Weight-Length Parameters
+#
+vert_stats <- vert_stats[-c(1:4),]
+wb_data <- vert_stats[,c(1, 32, 35)]
+colnames(wb_data) <- c("Code", "a", "b")
+wb_data$Code <- factor(wb_data$Code)
+wb_data$a <- as.numeric(as.character(wb_data$a))
+wb_data$b <- as.numeric(as.character(wb_data$b))
+wb_data$Code[wb_data$Code == ""] <- NA
+wb_data_m <- na.omit(wb_data)
 
+for(i in 1:nrow(wb_data)){
+  match_a <- grep(paste("li_a_",wb_data$Code[i], sep = ""), bio_params)
+  match_b <- grep(paste("li_b_",wb_data$Code[i], sep = ""), bio_params)
+  bio_params[match_a] <- paste("li_a_",wb_data$Code[i], " ", wb_data$a[i], " Coefficient of allometic length-weight relation for ", wb_data$Code[i], sep = "")
+  bio_params[match_b] <- paste("li_b_",wb_data$Code[i], " ", wb_data$b[i], " Coefficient of allometic length-weight relation for ", wb_data$Code[i], sep = "")
+}
+
+write(bio_params, file = k_bio)
