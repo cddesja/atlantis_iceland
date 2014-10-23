@@ -29,24 +29,30 @@ On the CSIRO wiki, there are various tools to help generate a *bgm* file. In par
 
 ### Functional Groups
 
-##### Pinnepids 
+#### Capelin (FCA)
+Biological parameters and initial conditions come largely from Vilhjálmsson (1994)[^vilhjalmsson1994icelandic]. The biomass estunate of 2,358,000 metric tons for 1979 was used to initialize the Icelandic Atlantis model (Vilhjálmsson, 1994 Table 15.9).
+
+##### Pinnepids (PIN)
 The pinnepid group (PIN) consists of the two breeding Icelandic seal species: grey seal, *Halichoerus grypus*, and the common (or harbour) seal, *Phoca vitulina*. Data for the grey seal come largely from Hauksson (2007a)[^10] and Hauksson (2007b)[^11]. Data on abundance and basic biology can be found in Hauksson (2007a) and data on von-Bertalanffy and weight-allometric growth parameters can be found in Hauksson (2007b). Grey seals breed between the middle of September to early November in colones along the southeast and northwest coasts. During other times of the year, grey seals are found throughout Iceland but are at higher densities off the west, northwest, and southeast coasts (Hauksson, 2007a). Grey seals were estimated to number around 4000 to 5000 in the 1960s, 8,000 to 11,500 in 1982, and 4,100 to 5,900 in 2002 (Hauksson, 2007a). Changes in population size appear to be associated with an increase of breeding land as people moved from the countryside in the 60s and the recent declines appears to be associated with increased fishing (Hauksson, 2007a). Given that the Icelandic Atlantis model is starting in 1948, the population size of 5,000 was used initially for grey seals.    
 
 Information on harbour seals come from Hauksson & Einarsson (2010a)[^hauksson2010historical], Hauksson & Einarsson (2010b)[^12], Lydersen & Kovacs (2005)[^lydersen2005growth]. Lydersen & Kovacs (2005) provided growth parameters for the Svalbard population of harbour seals. This information was used for the Icelandic population as these data were not available. Natural mortality for pinnepids was set to .1425 based on previous studies (reported in Hauksson & Einarsson, 2010a).
 
-#### Ocean Quahog (*Arctica islandica*)
+#### Seabirds (SB)
+The six most numerous bird species (Lilliendahl & Solmundsson, 1997[^lilliendahl1997estimate]) in Iceland were aggregrated into the seabird (SB) functional group. These species were the common murre (*Uria aalge*), thick-billed murre (*Uria lomvia*), razorbills (*Alca torda*), puffins (*Fratercula arctica*), kittiwakes (*Rissa tridactyla*), and northern fulmars (*Fulmarus glacialis*). These species have similar life histories and diets with the exception of the northern fulmar which is largely a scavenger eating dicards from fisherman. However, even sandeels and capelin make up a sizable portion of the northern fulmars diet (Lilliendahl & Solmundsson, 1997). Average weights for these species are reported in Lilliendahl & Solmundsson (1997) for razorbills, puffins, and fulmars. Average weights of the two murre species and kittiwakes were back calculated using the daily energy requirements reported in Table 3 in Lilliendahl & Solmundsson (1997) assuming the Birt-Friesen, Montevecchi, Cairns, & Macko (1989) relationship[^birt1989activity].  
+
+#### Ocean Quahog, *Arctica islandica* (QUA)
 
 Information on ocean quahog comes from Thorarinsdottir & Einarsson (1996)[^1], Thorarinsdottir & Jacobson (2005)[^2], the Icelandic Ministry of Fisheries[^3], and NOAA[^4].The ocean quahog is a long-lived (up to 400 years) bivalve occupying depths of 4 meters down to approximately 400 meters with depths up to 256 meters reported for Iceland (Thorarinsdottir & Einarsson, 1996). The majority of the catches in Iceland are reported between 5 and 50 meters (Thorarinsdottir & Jacobson, 2005).  They inhabit soft, sandy soil where they are endobenthic and filter-feed on phytoplankton and detritus. They typically avoid gravel areas and have very slow recruitment. Males may mature as early as 10 years (49 mm shell length) and females may mature as early as 13 years (44 mm shell length) (citation in Thorarinsdottir & Jacobson, 2005). Spawning in Iceland peaks between June - July but occurs all year round (citation in Thorarinsdottir & Jacobson, 2005). Larvae are planktonic for 4 - 6 weeks and settlement peaks off Iceland during August. Recruitment has occurred every year since 2002 in Icleand but recruitment appears to peak every 20 years (citation in Thorarinsdottir & Jacobson, 2005). They are a cold-water invertebrate (could be affected by global warming?) and can tolerate temperates up to 12 celsius in Iceland (Thorarinsdottir & Jacobson, 2005).
 
-According to the Icelandic Ministry of Fisheries, the stock size of ocean quahog in Icelandic waters is estimated at over 1 million tons with mean densities of 3.0 (+/- 0.3 SE), 2.8 (+/- 0.6 SE), and 4.2 (+/- 0.5 SE) kg/m$^2$ in the north-west, north, and east regions of Iceland (Thorarinsdottir & Einarsson, 1996). 
+According to the Icelandic Ministry of Fisheries, the stock size of ocean quahog in Icelandic waters is estimated at over 1 million tons with mean densities of 3.0 (+/- 0.3 SE), 2.8 (+/- 0.6 SE), and 4.2 (+/- 0.5 SE) kg/m$$$^2$$$ in the north-west, north, and east regions of Iceland (Thorarinsdottir & Einarsson, 1996). 
 
-#### Norway Lobster (*Nephrops norvegicus*)
+#### Norway Lobster, *Nephrops norvegicus* (LOB)
 
 All information on Norway lobster, *Nephrops norvegicus*, come from Pampoulie et al. (2010)[^5], Eiriksson (1999)[^6], the Icelandic Ministry of Fisheries, and personal communcations with staff at MRI in Reykjavík. Norway lobster are found exclusively in the south of Iceland at depths ranging from 100 - 300 meters (Eiriksson, 1999) preferring ocean temperatures of 6 - 9 celsius. They prefer soft bottom substrates (such as clay or sand), are endobenthic and feed on small benthic animals. They typically do not range more than 100 meters and there does not appear to be different genetic populations (Pampoulie et al. 2010)[@10]. 
 
 Initial biomass estimates and spatial distribution comes from Jónas Jónasson at the MRI. Biomass in 1968 was used for Norway lobster, which was roughly the virgin biomass. This value was 30,940 tons and was distributed to **Atlantis** boxes proportionate to their reported landings. 
 
-#### Iceland Scallop (*Chlamys islandica*)
+#### Iceland Scallop, *Chlamys islandica* (SCA)
 
 The initial biomass for Iceland scallop was distributed to the Brieðafjorður region of the **Atlantis** model (i.e. box 31). This biomass was 100,000 tons. 
 
@@ -135,15 +141,15 @@ $$\frac{d(NH\_3)}{dt} = - \sum_{}  $$
 
 #### Energy requirement equations
 
-The following equations were used to collect daily energy requirements for birds and mammals. These equations were reported in Hunt, Kato, & McKinnell (2000)[^hunt2000predation].
+The following equations were used to collect daily energy requirements for birds and mammals.
 
-For birds:
+For birds (Birt-Friesen, Montevecchi, Cairns, & Macko, 1989):
 
-$$ E = \exp{\left(3.24 + .727\log M\right)}$$ 
+$$ E = 10^{3.24 + .727\log\_{10} M}$$ 
 
-For mammals: 
+For mammals (Perez & McAlister, 1993[^perez1993estimates]): 
 
-$$ E = \exp{\left(a + 0.75 \log M\right)}$$
+$$ E = aM^{0.75} / 4.186$$
 
 Where *E* corresponds to energy requirement per day (kcal/day), *M* is mean body weight (kg), and *a* is 317 for toothed whales, 192 for baleen whales, 372 for otariid seals, and 200 for phocid seals. This was then converted to kj/day (1 kcal = 4.186 kj).
 
@@ -151,6 +157,13 @@ Where *E* corresponds to energy requirement per day (kcal/day), *M* is mean body
 **SHOULD FINISH THIS LATER BUT THE CRUMMY NOTATION KILLS ME :(**
 
 ## References
+
+[^lilliendahl1997estimate]: Lilliendahl, K., & Sólmundsson, J. (1997). An estimate of summer food consumption of six seabird species in Iceland. ICES Journal of Marine Science: Journal du Conseil, 54(4), 624-630.
+
+[^vilhjalmsson1994icelandic]: Vilhjálmsson, H. (1994). The Icelandic Capelin Stock: Capelin, Mallotus villosus (Müller) in the Iceland-Greenland-Jan Mayen area. Marine Research Institute. 
+
+[^birt1989activity]: Birt-Friesen, V. L., Montevecchi, W. A., Cairns, D. K., & Macko, S. A. (1989). Activity-specific metabolic rates of free-living northern gannets and other seabirds. Ecology, 357-367.
+
 [^7]: Anonymous. (2004). Development of structurally detailed statistically testable models of marine populations. Technical report. Fjölrit nr. 119. Marine Research Institute, Reyjavík, Iceland.
 
 [^3]: Anonymous. 2014, March. Icelandic Ministry of Fisheries and Agriculture. url: [http://www.fisheries.is/](http://www.fisheries.is/).
@@ -166,6 +179,8 @@ Where *E* corresponds to energy requirement per day (kcal/day), *M* is mean body
 [^hauksson2010historical]: Hauksson, E. & Einarsson, S. T. (2010a). Historical trend in harbour seal (*Phoca vitulina*) abundance in Iceland back to the year 1912. 
 
 [^12]: Hauksson, E. & Einarsson, S. T. (2010b). Review on utilization and research on harbour seal (*Phoca vitulina*) in Iceland. *NAMMCO Scientific Publications*, 8, 341 - 353.
+
+[^perez1993estimates]: Perez, M. A., & McAlister, W. B. (1993). Estimates of food consumption by marine mammals in the eastern Bering Sea. US Department of Commerce, National Oceanic and Atmospheric Administration, National Marine Fisheries Service, Alaska Fisheries Science Center.
 
 [^hunt2000predation]: Hunt, G. L., Kato, H., & McKinnell, S. M. (Eds.). (2000). Predation by marine birds and mammals in the subarctic North Pacific Ocean. North Pacific Marine Science Organization.
 

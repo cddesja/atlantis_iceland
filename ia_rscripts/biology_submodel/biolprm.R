@@ -726,3 +726,87 @@ for(i in 1:nrow(vert_dist)){
 }
 
 write(bio_params, file = k_bio)
+
+
+#
+# Daily Energy Requirements
+#
+
+# ///////////////
+## Seabirds
+# ///////////////
+bird_der <- function(x)
+{
+  10^(3.24 + .727*log10(x))
+}
+
+bird_der_mass <- function(x)
+{
+  10^((log10(x) - 3.24)/.727)
+}
+
+# kittiwake
+bird_der_mass(795) * 1000
+
+# thick-billed murres
+bird_der_mass(2080) * 1000
+bird_der(1.280)
+
+# common murres
+bird_der_mass(1789) * 1000
+bird_der(1.040)
+
+# puffin
+bird_der(.510)
+
+# razorbills
+bird_der(.632)
+
+# kittiwakes
+bird_der(.341)
+
+# norther fulmars
+bird_der(.787)
+
+# ////////////
+## Mammals
+# ///////////
+mammal_der <- function(a, x)
+{
+  a * x^.75 * 4.186
+}
+
+# PIN
+
+# grey
+mammal_der(a = 200, x = 197.57)
+
+# harbour
+mammal_der(a = 200, x = 87.32)
+
+# WMW
+mammal_der(a = 192, x = 5587090 / 1e3)
+
+# WHB
+
+# blue
+mammal_der(a = 192, x = 154321300 / 1e3)
+
+# sei
+mammal_der(a = 192, x = 22106250 / 1e3)
+
+# humpback
+mammal_der(a = 192, x = 3.00E+07 / 1e3)
+
+# fin
+mammal_der(a = 192, x = 47506010 / 1e3)
+
+# WHT
+wht <- c(14540960, 3393360, 5628760, 8.00E+05, 3400000, 4775000, 2300000)
+wht <- wht / 1e3
+mammal_der(a = 317, x = wht)
+
+# WTO
+wto <-c (52730, 186630, 208000)
+wto <- wto / 1e3
+mammal_der(a = 317, x = wto)
