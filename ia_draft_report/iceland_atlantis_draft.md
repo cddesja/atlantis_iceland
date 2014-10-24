@@ -32,10 +32,19 @@ On the CSIRO wiki, there are various tools to help generate a *bgm* file. In par
 #### Capelin (FCA)
 Biological parameters and initial conditions come largely from Vilhjálmsson (1994)[^vilhjalmsson1994icelandic]. The biomass estunate of 2,358,000 metric tons for 1979 was used to initialize the Icelandic Atlantis model (Vilhjálmsson, 1994 Table 15.9).
 
+#### Sandeels (FSD)
+
 ##### Pinnepids (PIN)
 The pinnepid group (PIN) consists of the two breeding Icelandic seal species: grey seal, *Halichoerus grypus*, and the common (or harbour) seal, *Phoca vitulina*. Data for the grey seal come largely from Hauksson (2007a)[^10] and Hauksson (2007b)[^11]. Data on abundance and basic biology can be found in Hauksson (2007a) and data on von-Bertalanffy and weight-allometric growth parameters can be found in Hauksson (2007b). Grey seals breed between the middle of September to early November in colones along the southeast and northwest coasts. During other times of the year, grey seals are found throughout Iceland but are at higher densities off the west, northwest, and southeast coasts (Hauksson, 2007a). Grey seals were estimated to number around 4000 to 5000 in the 1960s, 8,000 to 11,500 in 1982, and 4,100 to 5,900 in 2002 (Hauksson, 2007a). Changes in population size appear to be associated with an increase of breeding land as people moved from the countryside in the 60s and the recent declines appears to be associated with increased fishing (Hauksson, 2007a). Given that the Icelandic Atlantis model is starting in 1948, the population size of 5,000 was used initially for grey seals.    
 
 Information on harbour seals come from Hauksson & Einarsson (2010a)[^hauksson2010historical], Hauksson & Einarsson (2010b)[^12], Lydersen & Kovacs (2005)[^lydersen2005growth]. Lydersen & Kovacs (2005) provided growth parameters for the Svalbard population of harbour seals. This information was used for the Icelandic population as these data were not available. Natural mortality for pinnepids was set to .1425 based on previous studies (reported in Hauksson & Einarsson, 2010a).
+
+#### Baleen whales (WHB)
+Information on baleen whales commons from NAMMCO reports (XXX).
+
+#### Toothed whales (WHT)
+
+#### Other toothed whales (WTO)
 
 #### Seabirds (SB)
 The six most numerous bird species (Lilliendahl & Solmundsson, 1997[^lilliendahl1997estimate]) in Iceland were aggregrated into the seabird (SB) functional group. These species were the common murre (*Uria aalge*), thick-billed murre (*Uria lomvia*), razorbills (*Alca torda*), puffins (*Fratercula arctica*), kittiwakes (*Rissa tridactyla*), and northern fulmars (*Fulmarus glacialis*). These species have similar life histories and diets with the exception of the northern fulmar which is largely a scavenger eating dicards from fisherman. However, even sandeels and capelin make up a sizable portion of the northern fulmars diet (Lilliendahl & Solmundsson, 1997). Average weights for these species are reported in Lilliendahl & Solmundsson (1997) for razorbills, puffins, and fulmars. Average weights of the two murre species and kittiwakes were back calculated using the daily energy requirements reported in Table 3 in Lilliendahl & Solmundsson (1997) assuming the Birt-Friesen, Montevecchi, Cairns, & Macko (1989) relationship[^birt1989activity].  
